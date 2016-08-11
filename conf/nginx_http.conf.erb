@@ -9,7 +9,7 @@ gzip_types
   # text/html is always compressed by HttpGzipModule
   text/css
   text/javascript
-  text/xml
+ 
   text/plain
   text/x-component
   application/javascript
@@ -30,5 +30,7 @@ server {
     listen  <%= ENV['OPENSHIFT_NGINX_IP'] %>:<%= ENV['OPENSHIFT_NGINX_PORT'] %>;
     root    <%= ENV['OPENSHIFT_REPO_DIR'] %>/public;
 
-   
+    location / {
+        index index.html index.htm;
+    }
 }
