@@ -1,40 +1,47 @@
 Name: nginx
 Cartridge-Short-Name: NGINX
 Display-Name: Nginx
-Version: "1.11.1"
-Versions: [ "1.6.2", "1.7.10", "1.8.0", "1.9.9","1.9.12", "1.10.1", "1.11.1" ]
+Version: 1.11.1
+Versions:
+- 1.6.2
+- 1.7.10
+- 1.8.0
+- 1.9.9
+- 1.9.12
+- 1.10.1
+- 1.11.1
 Website: https://github.com/boekkooi/openshift-cartridge-nginx
 Cartridge-Version: 0.0.3
 Cartridge-Vendor: boekkooi
 Categories:
-  - web_framework
-  - service
-  - nginx
+- web_framework
+- service
+- nginx
 Provides:
-  - nginx-1.11
-  - nginx-1.10
-  - nginx-1.9
-  - nginx-1.8
-  - nginx-1.7
-  - nginx-1.6
-  - nginx
+- nginx-1.11
+- nginx-1.10
+- nginx-1.9
+- nginx-1.8
+- nginx-1.7
+- nginx-1.6
+- nginx
 Scaling:
   Min: 1
   Max: -1
 Cart-Data:
-  - Key: OPENSHIFT_NGINX_PORT
-    Type: environment
-    Description: "Internal port to which the web-framework binds to."
-  - Key: OPENSHIFT_NGINX_IP
-    Type: environment
-    Description: "Internal IP to which the web-framework binds to."
+- Key: OPENSHIFT_NGINX_PORT
+  Type: environment
+  Description: Internal port to which the web-framework binds to.
+- Key: OPENSHIFT_NGINX_IP
+  Type: environment
+  Description: Internal IP to which the web-framework binds to.
 Publishes:
   get-doc-root:
-    Type: "FILESYSTEM:doc-root"
+    Type: FILESYSTEM:doc-root
   publish-http-url:
-    Type: "NET_TCP:httpd-proxy-info"
+    Type: NET_TCP:httpd-proxy-info
   publish-gear-endpoint:
-    Type: "NET_TCP:gear-endpoint-info"
+    Type: NET_TCP:gear-endpoint-info
 Subscribes:
   set-env:
     Type: ENV:*
@@ -43,17 +50,20 @@ Subscribes:
     Type: STRING:urlpath
     Required: false
 Group-Overrides:
-  - components:
-    - web_proxy
+- components:
+  - web_proxy
 Endpoints:
-  - Private-IP-Name:   IP
-    Private-Port-Name: PORT
-    Private-Port:      8080
-    Public-Port-Name:  PROXY_PORT
-    Mappings:
-      - Frontend:      ""
-        Backend:       ""
-        Options:       { websocket: true }
-      - Frontend:      "/health"
-        Backend:       ""
-        Options:       { health: true }
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
+  - Frontend: /health
+    Backend: ''
+    Options:
+      health: true
+Source-Url: https://github.com/safran1/openshift-cartridge-nginx/archive/master.zip
